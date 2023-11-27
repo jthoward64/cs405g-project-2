@@ -23,11 +23,16 @@ Be careful how you deal with duplicates, you will need to track in some manner i
 ## Deliverable 2: Database Merging (50 points)
 
 > 2.1) Describe the method of importing data you chose.
+
 > 2.2) Describe how you handled duplicates. NOTE! Points are lost if Duplicates are not detected and handled properly.
+
 > 2.3) Show the commands you used for four of the entries: two that are duplicates, two that are not duplicates. At least one example from each of the imported databases.
-> You can copy and paste them into your submission document.
-> DO NOT use screen grabs or other image clipping for these submissions.
-> Use a fixed space font for this like courier for the database outputs.
+
+You can copy and paste them into your submission document.
+
+DO NOT use screen grabs or other image clipping for these submissions.
+
+Use a fixed space font for this like courier for the database outputs.
 
 Display your completed tables
 
