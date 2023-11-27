@@ -1,6 +1,8 @@
 from connection import connection
 
-if connection and connection.is_connected():
+if not connection:
+    print("Could not connect - no connection object")
+elif connection.is_connected():
     with connection.cursor() as cursor:
         result = cursor.execute("show tables;")
 
@@ -10,6 +12,5 @@ if connection and connection.is_connected():
             print(rows)
 
     connection.close()
-
 else:
-    print("Could not connect")
+    print("Not connected " + str(connection.conne))

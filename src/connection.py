@@ -1,6 +1,7 @@
 import mysql.connector
-from args import args
 from mysql.connector import errorcode
+
+from args import args
 
 config = {
     "user": "jtho264",
@@ -9,6 +10,8 @@ config = {
     "database": "jtho264",
     "raise_on_warnings": True,
 }
+
+connection = None
 
 try:
     connection = mysql.connector.connect(**config)
@@ -19,5 +22,3 @@ except mysql.connector.Error as err:
         print("Database does not exist")
     else:
         print(err)
-else:
-    connection.close()
