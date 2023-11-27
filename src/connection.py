@@ -4,10 +4,10 @@ from mysql.connector import errorcode
 from args import args
 
 config = {
-    "user": "jtho264",
+    "user": args.linkblue,
     "password": args.password,
     "host": "mysql.cs.uky.edu",
-    "database": "jtho264",
+    "database": args.linkblue,
     "raise_on_warnings": True,
 }
 
