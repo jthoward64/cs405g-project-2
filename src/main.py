@@ -1,4 +1,4 @@
-from mysql import connection
+from connection import connection
 
 if connection and connection.is_connected():
     with connection.cursor() as cursor:
