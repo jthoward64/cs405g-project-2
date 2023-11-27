@@ -13,4 +13,4 @@ elif connection.is_connected():
 
     connection.close()
 else:
-    print("Not connected " + str(connection.conne))
+    print("Not connected - connection object is not connected")
