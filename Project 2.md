@@ -1,8 +1,8 @@
 # Deliverables
 
 # Deliverable 1.1  
-Team 20: Blake Crockett, Bowen Fan, Madhav Dahal, Nishan Budhathoki  
-Team 21: Brennan Graham, Connor Day, Jose Cruz Guerrero, Keaton Martin  
+Team 20: Blake Crockett, Bowen Fan, Madhav Dahal, and Nishan Budhathoki  
+Team 21: Brennan Graham, Connor Day, Jose Cruz Guerrero, and Keaton Martin  
 # Deliverable 2.1
 
 # Deliverable 2.2
