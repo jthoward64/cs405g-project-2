@@ -1,6 +1,5 @@
 from connection import connection
 from database import (
-    grab_all,
     grab_all_entities,
     grab_all_receipts,
     grab_all_telephone_numbers,
@@ -10,8 +9,8 @@ from database import (
 try:
     show_tables()
 
-    grab_all_entities()
-    grab_all_receipts()
-    grab_all_telephone_numbers()
+    print(grab_all_entities())
+    print(grab_all_receipts())
+    print(grab_all_telephone_numbers())
 finally:
     connection.close()
