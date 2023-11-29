@@ -1,4 +1,5 @@
 from connection import connection
+from contact import get_contact_info
 
 
 def show_tables():
@@ -47,6 +48,7 @@ def grab_all_entities():
             "state": entity[4],
             "name": entity[5],
             "primary_phone": entity[6],
+            "contact_preference": get_contact_info(entity[7]),
         }
 
     return entities
