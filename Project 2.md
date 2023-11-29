@@ -1,7 +1,9 @@
 # Deliverables
 
 # Deliverable 1.1
-
+Team 10:  
+Team 20:  
+Team 21:  
 # Deliverable 2.1
 
 # Deliverable 2.2
