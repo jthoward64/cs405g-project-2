@@ -27,11 +27,11 @@ EZ-ish
 
 # Deliverable 4.1 (Michael Stacy)
 
--
+- See Preferences.py
 
 # Deliverable 4.2 (Michael Stacy)
 
--
+- See Preferences.py
 
 # Deliverable 5.1 (Demarkus Butler)
 

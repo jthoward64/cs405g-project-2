@@ -10,7 +10,6 @@ from database import (
 
 try:
     show_tables()
-
     print(tabulate(grab_all_entities()))
     print(tabulate(grab_all_receipts()))
     print(grab_all_telephone_numbers())

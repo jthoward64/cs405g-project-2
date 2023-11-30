@@ -40,8 +40,11 @@ def grab_all_entities():
     """Grabs everything from the entities table"""
     entities = grab_all("Entity_Table")
 
+    new_list = []
+
     for entity in entities:
-        entity = {
+        new_item = {
+            "entity_id": entity[0],
             "address": entity[1],
             "zip": entity[2],
             "city": entity[3],
@@ -50,8 +53,9 @@ def grab_all_entities():
             "primary_phone": entity[6],
             "contact_preference": get_contact_info(entity[7]),
         }
+        new_list.append(new_item)
 
-    return entities
+    return new_list
 
 
 def grab_all_receipts():
