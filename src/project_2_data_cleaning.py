@@ -184,7 +184,7 @@ for i in range(len(duplicates)):
 cursor.execute("SET FOREIGN_KEY_CHECKS = 0;")
 
 cursor.execute(
-    "INSERT INTO Entity_Table (duplicates) Values "
+    "INSERT INTO Entity_Table (duplicate) Values "
     + du[:-1]
     + ";"
 )
