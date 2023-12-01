@@ -130,6 +130,7 @@ Waiting on Tables to be finished before running Deliverable_4 to grab output. Sh
 
 - EZ
 
-# Deliverable 8.1 (Group)
+# Deliverable 8.1 (Current WIP, additional suggestions on topics to include welcome!)
 
--
+- 	One of the largest difficulties within this project stemmed from the differences in how the various groups formatted their databases, and figuring out how to format the data when importing their data, not only to make the data compatible, but to also allow our database to detect the duplicate entries. Because of this, a fair amount of time was spent developing ways to sanitize the imported data to make it both usable and recognizable to our own database. 
+
