@@ -148,12 +148,19 @@ cursor = connection.cursor()
 
 print("\n" + e21 + "\n")
 
+# Disable foreign key checks
+cursor.execute("SET FOREIGN_KEY_CHECKS = 0;")
+
 cursor.execute(
     "INSERT INTO Entity_Table (Entity_ID, Street_Name, Zip, City, StateName, EntityName, Primary_Telephone_Number) Values "
     + e21[:-1]
     + ";"
 )
-cursor.commit()
+
+cursor.execute("SET FOREIGN_KEY_CHECKS = 1;")
+
+connection.commit()
+
 # Check for duplicates
 # Import Entity_Table as dataframe
 Entity_Table3 = pd.read_sql("Select * from Entity_Table", connection)
@@ -168,10 +175,15 @@ duplicates.replace({True: "Y", False: "N"}, inplace=True)
 du = ""
 for i in range(len(duplicates)):
     du += "('" + duplicates[i] + "'),"
-    
+
+cursor.execute("SET FOREIGN_KEY_CHECKS = 0;")
+
 cursor.execute(
     "INSERT INTO Entity_Table (Entity_ID, Street_Name, Zip, City, StateName, EntityName, Primary_Telephone_Number) Values "
     + du[:-1]
     + ";"
 )
-cursor.commit()
+
+cursor.execute("SET FOREIGN_KEY_CHECKS = 1;")
+
+connection.commit()
