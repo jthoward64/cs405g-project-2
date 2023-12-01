@@ -49,6 +49,8 @@ def contact_info(
     if FAX:
         bitmask |= FAX_BITMASK
 
+    return bitmask
+
 
 class ContactInfo(TypedDict):
     text: bool
