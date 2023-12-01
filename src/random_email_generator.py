@@ -18,7 +18,7 @@ for i in range(len(Entity_Table["Entity_ID"])):
         + random.choice(["@uky.edu", "@icloud.com", "@gmail.com"])
     )
     email = email.replace(" ", str(random.randrange(111, 999)))
-    print(
+    cursor.execute(
         "UPDATE Entity_Table SET email = '"
         + email
         + "' WHERE Entity_ID = "
