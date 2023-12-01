@@ -582,3 +582,5 @@ mysqldump --host HOSTNAME -u USER -p team3 > cs405g.team3.sql
 # Deliverable 8.1 
 
 One of the largest difficulties within this project stemmed from the differences in how the various groups formatted their databases, and figuring out how to format the data when importing their data, not only to make the data compatible, but to also allow our database to detect the duplicate entries. Because of this, a fair amount of time was spent developing ways to sanitize the imported data to make it both usable and recognizable to our own database.
+
+In addition, we learned the importance of standardizing data. To this point, sometimes providing too much granularity for the data can make a database too cumbersome to use. However, if the data is not broken up sufficiently, more work will be needed later to perform certain queries. Because of this, a balance must be struck.
