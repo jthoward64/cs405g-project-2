@@ -81,7 +81,7 @@ def randomize_contacts():
         randomize_entity(entity["entity_id"])
 
 
-set_specific()
 randomize_contacts()
+set_specific()
 
 connection.close()
