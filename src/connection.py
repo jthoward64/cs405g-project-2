@@ -4,7 +4,7 @@ from mysql.connector import errorcode
 config = {
     "user": "root",
     "password": "password",
-    "host": "mysql.cs.uky.edu",
+    "host": "***REMOVED***",
     "database": "team3",
     "raise_on_warnings": True,
 }
