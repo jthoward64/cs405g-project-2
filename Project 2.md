@@ -5,7 +5,7 @@
 - Team 20: Blake Crockett, Bowen Fan, Madhav Dahal, Nishan Budhathoki
 - Team 21: Brennan Graham, Connor Day, Jose Cruz Guerrero, Keaton Martin
 
-# Deliverable 2.1
+# Deliverable 2.1 ✔
 
 To load in the other databases we initially used two methods depending on whether we had MySQL locally. Those of us who could only use mysql.cs.uky.edu renamed the other team's databases to have something like '\_team_20' after each name to avoid conflicting with our own tables. Those of us who had MySQL locally could instead load the other databases separately (into the databases team_3, team_20, and team_21). During our final integration one of us set up an internet accessible MySQL server and used the second method to load the three databases as it was more reproducible (and less prone to error) than loading all three team's tables into one database. This also mirrors much more closely how an actual database integration would work.
 
