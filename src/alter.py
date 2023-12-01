@@ -7,6 +7,9 @@ elif connection.is_connected():
         cursor.execute(
             "ALTER TABLE Entity_Table ADD COLUMN (Contact_Preferences TINYINT UNSIGNED NOT NULL DEFAULT 0);"
         )
+        cursor.execute(
+            "ALTER TABLE Entity_Table ADD COLUMN (duplicates VARCHAR(1) NOT NULL DEFAULT 'N');"
+        )
 
     connection.commit()
     connection.close()
