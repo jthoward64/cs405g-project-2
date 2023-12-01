@@ -1,5 +1,13 @@
 # Deliverables
 
+- Michael Stacy: jmst231@uky.edu
+
+- DeMarkus Butler: dlbu228@uky.edu
+
+- Tag Howard: tag@jthoward.dev
+
+- Keegan McCorkle: kjmc240@uky.edu
+
 # Deliverable 1.1
 
 - Team 20: Blake Crockett, Bowen Fan, Madhav Dahal, Nishan Budhathoki
@@ -581,7 +589,7 @@ TEXT: Mr. Bob Sydell c/o Intech; No phone number provided
 mysqldump --host HOSTNAME -u USER -p team3 > cs405g.team3.sql
 ```
 
-# Deliverable 8.1 
+# Deliverable 8.1
 
 One of the largest difficulties within this project stemmed from the differences in how the various groups formatted their databases, and figuring out how to format the data when importing their data, not only to make the data compatible, but to also allow our database to detect the duplicate entries. Because of this, a fair amount of time was spent developing ways to sanitize the imported data to make it both usable and recognizable to our own database.
 
