@@ -2,18 +2,20 @@
 
 # Deliverable 1.1 ✔✔
 
-- Team 20: Blake Crockett, Bowen Fan, Madhav Dahal, Nishan Budhathoki  
+- Team 20: Blake Crockett, Bowen Fan, Madhav Dahal, Nishan Budhathoki
 - Team 21: Brennan Graham, Connor Day, Jose Cruz Guerrero, Keaton Martin
 
-# Deliverable 2.1 
+# Deliverable 2.1
 
-- Just do it in Python
+To load in the other databases we initially used two methods depending on whether we had MySQL locally. Those of us who could only use mysql.cs.uky.edu renamed the other team's databases to have something like '\_team_20' after each name to avoid conflicting with our own tables. Those of us who had MySQL locally could instead load the other databases separately (into the databases team_3, team_20, and team_21). During our final integration one of us set up an internet accessible MySQL server and used the second method to load the three databases as it was more reproducible (and less prone to error) than loading all three team's tables into one database. This also mirrors much more closely how an actual database integration would work.
 
-# Deliverable 2.2 
+To merge the databases together we wrote a Python script that loaded both of the other team's databases into Pandas dataframes which were used to reformat and check the data. The script then output the Pandas dataframe into an SQL `INSERT` statement which added the data to our database.
+
+# Deliverable 2.2
 
 - Also python
 
-# Deliverable 2.3 
+# Deliverable 2.3
 
 - ...
 
@@ -104,6 +106,7 @@ randomize_contacts()
 ```
 
 # Deliverable 4.2 (Michael Stacy) ✔
+
 Waiting on Tables to be finished before running Deliverable_4 to grab output. Should be same output as Deliberable 3.2.
 
 # Deliverable 5.1 (Demarkus Butler) ✔
@@ -123,7 +126,7 @@ Waiting on Tables to be finished before running Deliverable_4 to grab output. Sh
 
 - See Deliverable_6.py
 
-# Deliverable 7.1 (Group) 
+# Deliverable 7.1 (Group)
 
 - EZ
 
