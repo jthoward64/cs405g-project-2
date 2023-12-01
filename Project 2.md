@@ -11,6 +11,8 @@ To load in the other databases we initially used two methods depending on whethe
 
 To merge the databases together we wrote a Python script that loaded both of the other team's databases into Pandas dataframes which were used to reformat and check the data. The script then output the Pandas dataframe into an SQL `INSERT` statement which added the data to our database.
 
+Additionally, our database only accepts entities that include both a name and address. Therefore, values from other databases that did not have values for both characteristics are dropped.
+
 # Deliverable 2.2
 
 We used python with pandas to flag duplicates. If the Name and Address for an entity matched another entity in the table, both were flagged as duplicates. For deliverables 5 and 6, only the information for the first value for each duplicate pair was used to generate the output.
