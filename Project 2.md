@@ -13,11 +13,27 @@ To merge the databases together we wrote a Python script that loaded both of the
 
 # Deliverable 2.2
 
-- Also python
+We used python with pandas to flag duplicates. If the Name and Address for an entity matched another entity in the table, both were flagged as duplicates. For deliverables 5 and 6, only the information for the first value for each duplicate pair was used to generate the output.
 
 # Deliverable 2.3
 
-- ...
+We used strings and python to update the tables. We Used the code:
+
+cursor.execute(
+    "INSERT INTO Entity_Table (Entity_ID, Street_Name, Zip, City, StateName, EntityName, Primary_Telephone_Number) Values "
+    + e21
+    + e20[:-1]
+    + ";"
+)
+
+where e20 were the entities from team20 and e21 were the values from team 21. Some of the values associated with these strings were
+
+e20 :(41,'300 Rose Street Room 102 Hardymon Building','40506','Lexington','KY','Mr. Ray L. Hyatt Jr.',NULL),
+(42,'301 Hilltop Avenue, Room 102','40506','Lexington','KY','Mr. Ray L. Hyatt Jr.',NULL)
+
+e21:(113,'666 Chestnut Road','40514','Lexington','KY','Richard Jackson','859-345-6782'),(114,'777 Poplar Court','40515','Lexington','KY','Mary Lewis','859-456-7893')
+
+Of note: some of the duplicate entries were copied into the other databases with different addresses. Given that we were importing the data as if we were a business who had acquired these customers, we did not modify the addresses as this could indicate that these are separate people with the same name.
 
 # Deliverable 3.1 (Michael Stacy & Tag Howard) ✔
 
@@ -111,26 +127,262 @@ Waiting on Tables to be finished before running Deliverable_4 to grab output. Sh
 
 # Deliverable 5.1 (Demarkus Butler) ✔
 
-- Wrote email maker
-- See Deliverable_5.py
+import mysql.connector
+import pandas as pd
+
+from args import args
+from connection import connection
+
+# Create Dataframe
+Entity_Table = pd.read_sql("Select * from Entity_Table", connection)
+
+Entity_Table["duplicate"] = "N"
+
+Entity_Table.loc[:5, "duplicate"] = "Y"
+
+# Create duplicates dataframe
+duplicates = Entity_Table[Entity_Table.duplicate == "Y"].copy()
+duplicates.reset_index(inplace=True, drop=True)
+
+# Combine name and Address to get identifier for possible duplicates
+duplicates["Name_Address"] = (
+    duplicates.EntityName
+    + " "
+    + duplicates.Street_Name
+    + " "
+    + duplicates.City
+    + " "
+    + duplicates.StateName
+    + " "
+    + duplicates.Zip
+)
+unique_names = duplicates.Name_Address.unique()
+
+# Create postcard
+# Only send postcard to first listing for likely duplicate. If after sending postcard it is determined that the customer was not a duplicate,
+# adjust database to indicate that the likely duplicates were unique customers
+for i in unique_names:
+    row = duplicates[duplicates.Name_Address == i].iloc[0]
+    print(
+        (row.email or "No email provided")
+        + "\n"
+        + row.EntityName
+        + "\n"
+        + row.Street_Name
+        + "\n"
+        + row.City
+        + ", "
+        + row.StateName
+        + " "
+        + row.Zip
+        + "\n\n"
+        + row.EntityName
+        + "\n"
+        + "It is great to meet you again! Your favorite food delivery family is growing, looks like you have already met some of our now expanded family. We want you to know that you will now get the same great service from our newly added drivers!"
+        + "\n\n"
+        + "Looking forward to serving you again!"
+        + "\n"
+    )
+
+connection.close()
 
 # Deliverable 5.2 (Demarkus Butler) ✔
 
-- See Deliverable_5.py
+Mr.296@icloud.com
+Mr. Ray L. Hyatt Jr.
+300 Rose Street Room 102 Hardymon Building
+Lexington, KY 40506
+
+Mr. Ray L. Hyatt Jr.
+It is great to meet you again! Your favorite food delivery family is growing, looks like you have already met some of our now expanded family. We want you to know that you will now get the same great service from our newly added drivers!
+
+Looking forward to serving you again!
+
+Mr.922@gmail.com
+Mr. Ray L. Hyatt Jr.
+301 Hilltop Avenue, Room 102
+Lexington, KY 40506
+
+Mr. Ray L. Hyatt Jr.
+It is great to meet you again! Your favorite food delivery family is growing, looks like you have already met some of our now expanded family. We want you to know that you will now get the same great service from our newly added drivers!
+
+Looking forward to serving you again!
+
+Joh111@gmail.com
+John Wick
+82 Beaver St Room 1301
+New York, NY 10005
+
+John Wick
+It is great to meet you again! Your favorite food delivery family is growing, looks like you have already met some of our now expanded family. We want you to know that you will now get the same great service from our newly added drivers!
+
+Looking forward to serving you again!
+
+Ton795@gmail.com
+Tony Stark
+200 Park Avenue Penthouse
+New York, NY 10001
+
+Tony Stark
+It is great to meet you again! Your favorite food delivery family is growing, looks like you have already met some of our now expanded family. We want you to know that you will now get the same great service from our newly added drivers!
+
+Looking forward to serving you again!
+
+Dr.902@gmail.com
+Dr. Stephen Strange
+117A Bleecker Street
+New York, NY 10001
+
+Dr. Stephen Strange
+It is great to meet you again! Your favorite food delivery family is growing, looks like you have already met some of our now expanded family. We want you to know that you will now get the same great service from our newly added drivers!
+
+Looking forward to serving you again!
+
+Bob944@icloud.com
+Bob C. Smith
+200 Park Avenue Apartment 221
+New York, NY 10001
+
+Bob C. Smith
+It is great to meet you again! Your favorite food delivery family is growing, looks like you have already met some of our now expanded family. We want you to know that you will now get the same great service from our newly added drivers!
+
+Looking forward to serving you again!
 
 # Deliverable 6.1 (Demarkus Butler) ✔
 
-- See Deliverable_6.py
+import mysql.connector
+import pandas as pd
+
+from connection import connection
+from contact import get_contact_info
+
+# Create Dataframe
+Entity_Table = pd.read_sql("Select * from Entity_Table", connection)
+
+# Create duplicates dataframe
+duplicates = Entity_Table[Entity_Table.duplicate == "Y"].copy()
+duplicates.reset_index(inplace=True, drop=True)
+
+# Combine name and Address to get identifier for possible duplicates
+duplicates["Name_Address"] = (
+    duplicates.EntityName
+    + " "
+    + duplicates.Street_Name
+    + " "
+    + duplicates.City
+    + " "
+    + duplicates.StateName
+    + " "
+    + duplicates.Zip
+)
+unique_names = duplicates.Name_Address.unique()
+
+# Send Coupon codes. Our customers are listed as entities rather than as businesses and customers; therefore, entity name is
+# used for the name for the coupon.
+# Customer can choose a contact preference that involves a phone number without providing a phone number. If no phone number is provided, the business is alerted that there is no phone number and therefore can collect one.
+for i in unique_names:
+    row = duplicates[duplicates.Name_Address == i].iloc[0]
+    row.contact_preferences = get_contact_info(row.Contact_Preferences)
+    if row.contact_preferences["email"] == True:
+        print("EMAIL: " + row.EntityName + ";" + row.email + ";" + "25% Coupon Code")
+    if row.contact_preferences["text"] == True:
+        if row.Primary_Telephone_Number != None:
+            print(
+                "TEXT: "
+                + row.EntityName
+                + "; "
+                + row.Primary_Telephone_Number
+                + "; "
+                + "25% Coupon Code"
+            )
+        else:
+            print("TEXT: " + row.EntityName + "; No phone number provided")
+    if row.contact_preferences["robocall"] == True:
+        if row.Primary_Telephone_Number != None:
+            print(
+                "ROBOCALL: "
+                + row.EntityName
+                + "; "
+                + row.Primary_Telephone_Number
+                + "; "
+                + "25% Coupon Code"
+            )
+        else:
+            print("ROBOCALL: " + row.EntityName + "; No phone number provided")
+    if row.contact_preferences["phone"] == True:
+        if row.Primary_Telephone_Number != None:
+            print(
+                "PHONE: "
+                + row.EntityName
+                + "; "
+                + row.Primary_Telephone_Number
+                + "; "
+                + "25% Coupon Code"
+            )
+        else:
+            print("PHONE: " + row.EntityName + "; No phone number provided")
+    if row.contact_preferences["fax"] == True:
+        if row.Primary_Telephone_Number != None:
+            print(
+                "FAX: "
+                + row.EntityName
+                + "; "
+                + row.Primary_Telephone_Number
+                + "; "
+                + "25% Coupon Code"
+            )
+        else:
+            print("FAX: " + row.EntityName + "; No phone number provided")
+    if row.contact_preferences["dnc"] == True:
+        print("DNC: " + row.EntityName)
+    if row.contact_preferences["mail"] == True:
+        print(
+            "MAIL: "
+            + row.EntityName
+            + "; "
+            + row.Street_Name
+            + " "
+            + row.City
+            + ", "
+            + row.StateName
+            + " "
+            + row.Zip
+            + "; "
+            + "25% Coupon Code"
+        )
+    print(" ")
+
+connection.close()
 
 # Deliverable 6.2 (Demarkus Butler) ✔
 
-- See Deliverable_6.py
+DNC: Mr. Ray L. Hyatt Jr.
+ 
+DNC: Mr. Ray L. Hyatt Jr.
+ 
+ROBOCALL: John Wick; 555-555-5555; 25% Coupon Code
+ 
+EMAIL: Tony Stark;Ton795@gmail.com;25% Coupon Code
+TEXT: Tony Stark; 555-555-3142; 25% Coupon Code
+ROBOCALL: Tony Stark; 555-555-3142; 25% Coupon Code
+PHONE: Tony Stark; 555-555-3142; 25% Coupon Code
+FAX: Tony Stark; 555-555-3142; 25% Coupon Code
+MAIL: Tony Stark; 200 Park Avenue Penthouse New York, NY 10001; 25% Coupon Code
+ 
+MAIL: Dr. Stephen Strange; 117A Bleecker Street New York, NY 10001; 25% Coupon Code
+ 
+TEXT: Bob C. Smith; No phone number provided
+ 
+TEXT: Bob C. Smith; No phone number provided
+ 
+TEXT: Bob Porter c/o Intech; No phone number provided
+ 
+TEXT: Mr. Bob Sydell c/o Intech; No phone number provided
 
 # Deliverable 7.1 (Group)
 
 - EZ
 
-# Deliverable 8.1 (Current WIP, additional suggestions on topics to include welcome!)
+# Deliverable 8.1 (Group)
 
-- 	One of the largest difficulties within this project stemmed from the differences in how the various groups formatted their databases, and figuring out how to format the data when importing their data, not only to make the data compatible, but to also allow our database to detect the duplicate entries. Because of this, a fair amount of time was spent developing ways to sanitize the imported data to make it both usable and recognizable to our own database. 
-
+-
