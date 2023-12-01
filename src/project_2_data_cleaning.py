@@ -34,6 +34,9 @@ PhoneNumbers20 = PhoneNumbers20.merge(df20, on="entity_id", how="left")
 df20.fillna("NULL", inplace=True)
 # Replace ''' with '\''
 df20.replace(regex=r"\'", value="\\'", inplace=True)
+df20.replace(regex=r"\n", value=" ", inplace=True)
+df20.replace(regex=r"^ ", value="", inplace=True)
+df20.replace(regex=r" $", value="", inplace=True)
 # Create String for Phone Numbers
 ph20 = ""
 for i in range(len(PhoneNumbers20)):
@@ -98,8 +101,12 @@ df21 = (
 df21.fillna("NULL", inplace=True)
 # Replace ''' with '\''
 df21.replace(regex=r"\'", value="\\'", inplace=True)
+df21.replace(regex=r"\n", value=" ", inplace=True)
+df21.replace(regex=r"^ ", value="", inplace=True)
+df21.replace(regex=r" $", value="", inplace=True)
 # Standardize state ti match our database
 df21.State.replace({"Kentucky": "KY", "Ky": "KY", "New York": "NY"}, inplace=True)
+
 
 # Convert to Appropriate IDs
 df21["EntityID"] = df21.index + 81
@@ -146,7 +153,7 @@ cursor.execute(
     + e21[:-1]
     + ";"
 )
-
+cursor.commit()
 # Check for duplicates
 # Import Entity_Table as dataframe
 Entity_Table3 = pd.read_sql("Select * from Entity_Table", connection)
@@ -161,3 +168,10 @@ duplicates.replace({True: "Y", False: "N"}, inplace=True)
 du = ""
 for i in range(len(duplicates)):
     du += "('" + duplicates[i] + "'),"
+    
+cursor.execute(
+    "INSERT INTO Entity_Table (Entity_ID, Street_Name, Zip, City, StateName, EntityName, Primary_Telephone_Number) Values "
+    + du[:-1]
+    + ";"
+)
+cursor.commit()
