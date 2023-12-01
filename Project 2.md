@@ -36,18 +36,19 @@
 # Deliverable 5.1 (Demarkus Butler)
 
 - Wrote email maker
+- See Deliverable_5.py
 
 # Deliverable 5.2 (Demarkus Butler)
 
--
+- See Deliverable_5.py
 
 # Deliverable 6.1 (Demarkus Butler)
 
--
+- See Deliverable_6.py
 
 # Deliverable 6.2 (Demarkus Butler)
 
--
+- See Deliverable_6.py
 
 # Deliverable 7.1 (Group)
 
