@@ -9,9 +9,9 @@ Entity_Table = pd.read_sql("Select * from Entity_Table", connection)
 
 cursor = connection.cursor()
 emails = []
-for i in Entity_Table["Entity_ID"]:
-    name = Entity_Table[Entity_Table.Entity_ID == i].EntityName
-
+for i in range(len(Entity_Table["Entity_ID"])):
+    row = Entity_Table.iloc[0]
+    name = row.EntityName
     email = (
         name[:3]
         + str(random.randrange(111, 999))
