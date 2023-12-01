@@ -59,6 +59,8 @@ def grab_all_entities():
             "name": entity[5],
             "primary_phone": entity[6],
             "contact_preference": get_contact_info(entity[7]),
+            "duplicate": entity[8],
+            "email": entity[9],
         }
         new_list.append(new_item)
 
