@@ -30,6 +30,8 @@ PhoneNumbers20 = PhoneNumbers20.merge(df20, on="entity_id", how="left")
 
 # Replace 'NA' with 'Null'
 df20.fillna("NULL", inplace=True)
+# Replace ''' with '\''
+df20.replace(regex = r'\'', value = '\\\'', inplace = True)
 # Create String for Phone Numbers
 ph20 = ""
 for i in range(len(PhoneNumbers20)):
@@ -90,6 +92,8 @@ df21 = (
 )
 # Replace 'NA' with 'Null'
 df21.fillna("NULL", inplace=True)
+# Replace ''' with '\''
+df21.replace(regex = r'\'', value = '\\\'', inplace = True)
 # Standardize state ti match our database
 df21.State.replace({"Kentucky": "KY", "Ky": "KY", "New York": "NY"}, inplace=True)
 
