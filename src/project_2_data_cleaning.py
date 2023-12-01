@@ -31,7 +31,7 @@ PhoneNumbers20.loc[25, "phone_number"] = "869-678-789"
 PhoneNumbers20 = PhoneNumbers20.merge(df20, on="entity_id", how="left")
 
 # Remove if no Street Address or entityname
-df20.dropna(subset = ['StreetAddress', 'EntityName'], inplace = True)
+df20.dropna(subset=["StreetAddress", "EntityName"], inplace=True)
 # Replace 'NA' with 'Null'
 df20.fillna("NULL", inplace=True)
 # Replace ''' with '\''
@@ -101,7 +101,7 @@ df21 = (
 )
 
 # Remove if no Street Address or name
-df21.dropna(subset = ['StreetAddress', 'Full_Name'], inplace = True)
+df21.dropna(subset=["StreetAddress", "Full_Name"], inplace=True)
 # Replace 'NA' with 'Null'
 df21.fillna("NULL", inplace=True)
 # Replace ''' with '\''
@@ -192,3 +192,5 @@ cursor.execute(
 cursor.execute("SET FOREIGN_KEY_CHECKS = 1;")
 
 connection.commit()
+
+connection.close()
