@@ -35,7 +35,9 @@ unique_names = duplicates.Name_Address.unique()
 for i in unique_names:
     row = duplicates[duplicates.Name_Address == i].iloc[0]
     print(
-        row.EntityName
+        row.email
+        + "\n"
+        + row.EntityName
         + "\n"
         + row.Street_Name
         + "\n"
