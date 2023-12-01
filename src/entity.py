@@ -3,7 +3,7 @@ from connection import connection
 import random
 
 class Entity:
-    def __init__(self, itemized_info):
+    def __init__(self, itemized_info, randomized=None):
         self.id = itemized_info[0]
         self.address = itemized_info[1]
         self.zip = itemized_info[2]
@@ -11,12 +11,11 @@ class Entity:
         self.state = itemized_info[4]
         self.name = itemized_info[5]
         self.primary_phone = itemized_info[6]
-        self.contact_preference = get_contact_info(itemized_info[7])
+        self.contact_preference = get_contact_info(itemized_info[7]) if randomized is None else random.randint(0, 255)
 
     def __eq__(self, other):
         if self.name == other.name:
             return True
-        
         return False
 
     def randomize(self):
@@ -24,8 +23,8 @@ class Entity:
 
 class Database:
     def __init__(self):
-        entities = []
-        duplicates = []
+        self.entities = []
+        self.duplicates = []
 
     def duplicate(self, new_entity):
         '''Checks if there is a duplicate entity, assigns it to other table'''
@@ -55,14 +54,26 @@ class Database:
             return None
         elif connection.is_connected():
             with connection.cursor() as cursor:
-                cursor.execute('SELECT * FROM Entity_Table;')
-                rows = cursor.fetchall()
-                for item in rows:
-                    self.duplicate(Entity(item))
+                cursor.execute('SELECT * FROM ADRESS20;')
+                AddressList = cursor.fetchall()
+
+                cursor.execute('SELECT * FROM Entities20')
+                EntityList = cursor.fetchall()
+
+                new_entities = []
+
+                for new_entity in EntityList:
+                    for item in AddressList:
+                        if item[0] == new_entity[2]:
+                            print('Match Found')
+                            new_item = [
+                                
+                            ]
         else:
             print("Not connected - connection object is not connected")
 
     def grab_entities_21(self):
+        '''NEED TO MODIFY'''
         if not connection:
             print('Could not connect - no connection object')
             return None
