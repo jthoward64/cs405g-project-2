@@ -19,9 +19,9 @@
 -- Current Database: `ktma234`
 --
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `ktma234` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `team21` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 
-USE `ktma234`;
+USE `team21`;
 
 --
 -- Table structure for table `Address`
