@@ -15,4 +15,6 @@ python ./src/Deliverable_4.py
 # Add the emails
 python ./src/random_email_generator.py
 
-#
+# Run last two deliverables
+python ./src/Deliverable_5.py
+python ./src/Deliverable_6.py
