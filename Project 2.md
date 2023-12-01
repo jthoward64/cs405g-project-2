@@ -35,7 +35,7 @@
 
 # Deliverable 5.1 (Demarkus Butler)
 
-Wrote email maker
+- Wrote email maker
 
 # Deliverable 5.2 (Demarkus Butler)
 
