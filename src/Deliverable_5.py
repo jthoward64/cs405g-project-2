@@ -36,6 +36,7 @@ for i in unique_names:
     row = duplicates[duplicates.Name_Address == i].iloc[0]
     print(
         row.email
+        or "No email provided"
         + "\n"
         + row.EntityName
         + "\n"
@@ -54,3 +55,5 @@ for i in unique_names:
         + "Looking forward to serving you again!"
         + "\n"
     )
+
+connection.close()

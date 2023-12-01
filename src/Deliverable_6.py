@@ -99,3 +99,5 @@ for i in unique_names:
             + "25% Coupon Code"
         )
     print(" ")
+
+connection.close()
