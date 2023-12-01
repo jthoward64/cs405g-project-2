@@ -1,11 +1,11 @@
 # Deliverables
 
-# Deliverable 1.1 ✔✔
+# Deliverable 1.1
 
 - Team 20: Blake Crockett, Bowen Fan, Madhav Dahal, Nishan Budhathoki
 - Team 21: Brennan Graham, Connor Day, Jose Cruz Guerrero, Keaton Martin
 
-# Deliverable 2.1 ✔✔
+# Deliverable 2.1
 
 To load in the other databases we initially used two methods depending on whether we had MySQL locally. Those of us who could only use mysql.cs.uky.edu renamed the other team's databases to have something like '\_team_20' after each name to avoid conflicting with our own tables. Those of us who had MySQL locally could instead load the other databases separately (into the databases team_3, team_20, and team_21). During our final integration one of us set up an internet accessible MySQL server and used the second method to load the three databases as it was more reproducible (and less prone to error) than loading all three team's tables into one database. This also mirrors much more closely how an actual database integration would work.
 
@@ -13,17 +13,47 @@ To merge the databases together we wrote a Python script that loaded both of the
 
 # Deliverable 2.2
 
-- Also python
+We used python with pandas to flag duplicates. If the Name and Address for an entity matched another entity in the table, both were flagged as duplicates. For deliverables 5 and 6, only the information for the first value for each duplicate pair was used to generate the output.
 
 # Deliverable 2.3
 
-- ...
+We used strings and python to update the tables. We Used the code:
 
-# Deliverable 3.1 (Michael Stacy & Tag Howard) ✔
+```python
+cursor.execute(
+    "INSERT INTO Entity_Table (Entity_ID, Street_Name, Zip, City, StateName, EntityName, Primary_Telephone_Number) Values "
+    + e21
+    + e20[:-1]
+    + ";"
+)
+```
 
-- EZ
+where e20 were the entities from team20 and e21 were the values from team 21. Some of the values associated with these strings were
 
-# Deliverable 3.2 (Michael Stacy & Tag Howard) ✔
+```python
+e20 :(41,'300 Rose Street Room 102 Hardymon Building','40506','Lexington','KY','Mr. Ray L. Hyatt Jr.',NULL),
+(42,'301 Hilltop Avenue, Room 102','40506','Lexington','KY','Mr. Ray L. Hyatt Jr.',NULL)
+```
+
+```python
+e21:(113,'666 Chestnut Road','40514','Lexington','KY','Richard Jackson','859-345-6782'),(114,'777 Poplar Court','40515','Lexington','KY','Mary Lewis','859-456-7893')
+```
+
+Of note: some of the duplicate entries were copied into the other databases with different addresses. Given that we were importing the data as if we were a business who had acquired these customers, we did not modify the addresses as this could indicate that these are separate people with the same name.
+
+# Deliverable 3.1
+
+```
++-------------------+
+| Tables_in_team3   |
++-------------------+
+| Entity_Table      |
+| Receipt_Table     |
+| Telephone_Numbers |
++-------------------+
+```
+
+# Deliverable 3.2
 
 ```
 +-----------+-----------------------------------------------+-------+------------------+-----------+-----------------------------------+--------------------------+---------------------+-----------+--------------------+
@@ -152,7 +182,7 @@ To merge the databases together we wrote a Python script that loaded both of the
 +-----------+-----------------------------------------------+-------+------------------+-----------+-----------------------------------+--------------------------+---------------------+-----------+--------------------+
 ```
 
-# Deliverable 4.1 (Michael Stacy) ✔✔
+# Deliverable 4.1
 
 ```py
 from connection import connection
@@ -230,7 +260,7 @@ set_specific()
 randomize_contacts()
 ```
 
-# Deliverable 4.2 (Michael Stacy) ✔
+# Deliverable 4.2
 
 See 3.2, since the contact values are just booleans, we decided to use a bitmask to store them together in a single column. This is out logic for storing the value:
 
@@ -281,7 +311,7 @@ def contact_info(
     return bitmask
 ```
 
-# Deliverable 5.1 (Demarkus Butler) ✔
+# Deliverable 5.1
 
 ```python
 import mysql.connector
@@ -344,7 +374,7 @@ for i in unique_names:
 connection.close()
 ```
 
-# Deliverable 5.2 (Demarkus Butler) ✔
+# Deliverable 5.2
 
 ```
 Mr.296@icloud.com
@@ -516,7 +546,7 @@ for i in unique_names:
 connection.close()
 ```
 
-# Deliverable 6.2 (Demarkus Butler) ✔
+# Deliverable 6.2
 
 ```
 DNC: Mr. Ray L. Hyatt Jr.
@@ -543,7 +573,7 @@ TEXT: Bob Porter c/o Intech; No phone number provided
 TEXT: Mr. Bob Sydell c/o Intech; No phone number provided
 ```
 
-# Deliverable 7.1 (Group)
+# Deliverable 7.1
 
 ```sh
 mysqldump --host HOSTNAME -u USER -p team3 > cs405g.team3.sql
