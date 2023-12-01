@@ -30,6 +30,8 @@ PhoneNumbers20.loc[25, "phone_number"] = "869-678-789"
 # Join PhoneNumbers with new AddressID
 PhoneNumbers20 = PhoneNumbers20.merge(df20, on="entity_id", how="left")
 
+# Remove if no Street Address or entityname
+df20.dropna(subset = ['StreetAddress', 'EntityName'], inplace = True)
 # Replace 'NA' with 'Null'
 df20.fillna("NULL", inplace=True)
 # Replace ''' with '\''
@@ -97,6 +99,9 @@ df21 = (
     .merge(Address21, on="AddressID", how="outer")
     .merge(PhoneNumbers21, on="NameID", how="outer")
 )
+
+# Remove if no Street Address or name
+df21.dropna(subset = ['StreetAddress', 'Full_Name'], inplace = True)
 # Replace 'NA' with 'Null'
 df21.fillna("NULL", inplace=True)
 # Replace ''' with '\''
