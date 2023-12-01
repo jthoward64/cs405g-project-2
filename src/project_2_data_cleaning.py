@@ -72,6 +72,8 @@ for i in range(len(df20)):
 e20 = e20.replace("'NULL'", "NULL")
 
 
+
+
 # Connect to mysql
 cnx21 = mysql.connector.connect(
     database="team21", user="root", password="password", host="***REMOVED***"
@@ -158,7 +160,8 @@ cursor.execute("SET FOREIGN_KEY_CHECKS = 0;")
 
 cursor.execute(
     "INSERT INTO Entity_Table (Entity_ID, Street_Name, Zip, City, StateName, EntityName, Primary_Telephone_Number) Values "
-    + e21[:-1]
+    + e21
+    + e20[:-1]
     + ";"
 )
 
@@ -184,7 +187,7 @@ for i in range(len(duplicates)):
 cursor.execute("SET FOREIGN_KEY_CHECKS = 0;")
 
 cursor.execute(
-    "INSERT INTO Entity_Table (duplicate) Values "
+    "UPDATE Entity_Table (duplicate) Values "
     + du[:-1]
     + ";"
 )
