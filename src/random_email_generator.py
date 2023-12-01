@@ -6,19 +6,25 @@ from connection import connection
 
 # Create Dataframe
 Entity_Table = pd.read_sql("Select * from Entity_Table", connection)
-names = list(Entity_Table.EntityName)
-emails = ""
-for i in names:
+
+cursor = connection.cursor()
+emails = []
+for i in Entity_Table["Entity_ID"]:
+    name = Entity_Table[Entity_Table.Entity_ID == i].EntityName
+
     email = (
-        i[:3]
+        name[:3]
         + str(random.randrange(111, 999))
         + random.choice(["@uky.edu", "@icloud.com", "@gmail.com"])
     )
     email = email.replace(" ", str(random.randrange(111, 999)))
-    emails += "('" + email + "'),"
+    print(
+        "UPDATE Entity_Table SET email = '"
+        + email
+        + "' WHERE Entity_ID = "
+        + Entity_Table["Entity_ID"][i].astype(str)
+        + ";"
+    )
 
-cursor = connection.cursor()
-
-cursor.execute("INSERT INTO Entity_Table (email) Values " + emails[:-1] + ";")
 connection.commit()
 connection.close()
