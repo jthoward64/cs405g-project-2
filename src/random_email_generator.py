@@ -10,7 +10,7 @@ Entity_Table = pd.read_sql("Select * from Entity_Table", connection)
 cursor = connection.cursor()
 emails = []
 for i in range(len(Entity_Table["Entity_ID"])):
-    row = Entity_Table.iloc[0]
+    row = Entity_Table.iloc[i]
     name = row.EntityName
     email = (
         name[:3]
@@ -22,7 +22,7 @@ for i in range(len(Entity_Table["Entity_ID"])):
         "UPDATE Entity_Table SET email = '"
         + email
         + "' WHERE Entity_ID = "
-        + Entity_Table["Entity_ID"][i].astype(str)
+        + row.Entity_ID.astype(str)
         + ";"
     )
 
