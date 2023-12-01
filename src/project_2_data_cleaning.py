@@ -31,7 +31,7 @@ PhoneNumbers20.loc[25, "phone_number"] = "869-678-789"
 PhoneNumbers20 = PhoneNumbers20.merge(df20, on="entity_id", how="left")
 
 # Remove if no Street Address or entityname
-df20.dropna(subset=["StreetAddress", "EntityName"], inplace=True)
+df20.dropna(subset = ['StreetAddress', 'EntityName'], inplace = True)
 # Replace 'NA' with 'Null'
 df20.fillna("NULL", inplace=True)
 # Replace ''' with '\''
@@ -101,7 +101,7 @@ df21 = (
 )
 
 # Remove if no Street Address or name
-df21.dropna(subset=["StreetAddress", "Full_Name"], inplace=True)
+df21.dropna(subset = ['StreetAddress', 'Full_Name'], inplace = True)
 # Replace 'NA' with 'Null'
 df21.fillna("NULL", inplace=True)
 # Replace ''' with '\''
@@ -184,7 +184,7 @@ for i in range(len(duplicates)):
 cursor.execute("SET FOREIGN_KEY_CHECKS = 0;")
 
 cursor.execute(
-    "INSERT INTO Entity_Table (Entity_ID, Street_Name, Zip, City, StateName, EntityName, Primary_Telephone_Number) Values "
+    "INSERT INTO Entity_Table (duplicates) Values "
     + du[:-1]
     + ";"
 )
@@ -192,5 +192,3 @@ cursor.execute(
 cursor.execute("SET FOREIGN_KEY_CHECKS = 1;")
 
 connection.commit()
-
-connection.close()
