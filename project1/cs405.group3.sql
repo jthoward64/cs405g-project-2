@@ -16,12 +16,12 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Current Database: `jtho264`
+-- Current Database: `team3`
 --
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `jtho264` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `team3` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 
-USE `jtho264`;
+USE `team3`;
 
 --
 -- Table structure for table `Entity_Table`

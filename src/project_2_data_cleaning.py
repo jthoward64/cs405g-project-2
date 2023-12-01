@@ -6,7 +6,9 @@ from args import args
 from connection import connection
 
 # Connect to mysql
-cnx20 = mysql.connector.connect(database="team20", user="tagho", password="tagho")
+cnx20 = mysql.connector.connect(
+    database="team20", user="root", password="password", host="***REMOVED***"
+)
 
 # Import Group 20 tables and clean data
 Entities20 = pd.read_sql("Select * from Entities", cnx20)
@@ -66,7 +68,9 @@ e20 = e20.replace("'NULL'", "NULL")
 
 
 # Connect to mysql
-cnx21 = mysql.connector.connect(database="team21", user="tagho", password="tagho")
+cnx21 = mysql.connector.connect(
+    database="team21", user="root", password="password", host="***REMOVED***"
+)
 
 # Import Group 21 tables and clean data
 Name21 = pd.read_sql("Select * from Name", cnx21)

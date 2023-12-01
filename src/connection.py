@@ -1,13 +1,11 @@
 import mysql.connector
 from mysql.connector import errorcode
 
-from args import args
-
 config = {
-    "user": args.linkblue,
-    "password": args.password,
+    "user": "root",
+    "password": "password",
     "host": "mysql.cs.uky.edu",
-    "database": args.linkblue,
+    "database": "team3",
     "raise_on_warnings": True,
 }
 
