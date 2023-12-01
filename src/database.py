@@ -11,6 +11,10 @@ def show_tables():
 
             rows = cursor.fetchall()
 
+            if rows is None:
+                print("No tables")
+                return
+
             for rows in rows:
                 print(rows)
 
@@ -40,6 +44,9 @@ def grab_all_entities():
     """Grabs everything from the entities table"""
     entities = grab_all("Entity_Table")
 
+    if entities is None:
+        return None
+
     new_list = []
 
     for entity in entities:
@@ -62,6 +69,9 @@ def grab_all_receipts():
     """Grabs everything from the receipts table"""
     receipts = grab_all("Receipt_Table")
 
+    if receipts is None:
+        return None
+
     for receipt in receipts:
         receipt = {
             "entity_seller_id": receipt[1],
@@ -81,6 +91,9 @@ def grab_all_receipts():
 def grab_all_telephone_numbers():
     """Grabs everything from the telephone numbers table"""
     numbers = grab_all("Telephone_Numbers")
+
+    if numbers is None:
+        return None
 
     entity_id_to_telephone_numbers = {}
 

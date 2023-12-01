@@ -8,7 +8,7 @@ from contact import get_contact_info
 Entity_Table = pd.read_sql("Select * from Entity_Table", connection)
 
 # Create duplicates dataframe
-duplicates = Entity_Table[Entity_Table.duplicated == "Y"].copy()
+duplicates = Entity_Table[Entity_Table.duplicate == "Y"].copy()
 duplicates.reset_index(inplace=True, drop=True)
 
 # Combine name and Address to get identifier for possible duplicates
