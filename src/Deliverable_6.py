@@ -30,7 +30,7 @@ unique_names = duplicates.Name_Address.unique()
 # Customer can choose a contact preference that involves a phone number without providing a phone number. If no phone number is provided, the business is alerted that there is no phone number and therefore can collect one.
 for i in unique_names:
     row = duplicates[duplicates.Name_Address == i].iloc[0]
-    row.contact_preferences = get_contact_info(row.contact_preferences)
+    row.contact_preferences = get_contact_info(row.Contact_Preferences)
     if row.contact_preferences["email"] == "True":
         print("EMAIL: " + row.EntityName + ";" + row.email + ";" + "25% Coupon Code")
     if row.contact_preferences["text"] == True:

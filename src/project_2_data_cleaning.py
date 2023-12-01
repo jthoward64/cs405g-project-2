@@ -31,7 +31,7 @@ PhoneNumbers20.loc[25, "phone_number"] = "869-678-789"
 PhoneNumbers20 = PhoneNumbers20.merge(df20, on="entity_id", how="left")
 
 # Remove if no Street Address or entityname
-df20.dropna(subset = ['StreetAddress', 'EntityName'], inplace = True)
+df20.dropna(subset=["StreetAddress", "EntityName"], inplace=True)
 # Replace 'NA' with 'Null'
 df20.fillna("NULL", inplace=True)
 # Replace ''' with '\''
@@ -72,8 +72,6 @@ for i in range(len(df20)):
 e20 = e20.replace("'NULL'", "NULL")
 
 
-
-
 # Connect to mysql
 cnx21 = mysql.connector.connect(
     database="team21", user="root", password="password", host="***REMOVED***"
@@ -103,7 +101,7 @@ df21 = (
 )
 
 # Remove if no Street Address or name
-df21.dropna(subset = ['StreetAddress', 'Full_Name'], inplace = True)
+df21.dropna(subset=["StreetAddress", "Full_Name"], inplace=True)
 # Replace 'NA' with 'Null'
 df21.fillna("NULL", inplace=True)
 # Replace ''' with '\''
@@ -180,18 +178,15 @@ duplicates = Entity_Table3.duplicated(
 duplicates.replace({True: "Y", False: "N"}, inplace=True)
 
 # Create string for duplicates
-du = ""
 for i in range(len(duplicates)):
-    du += "('" + duplicates[i] + "'),"
-
-cursor.execute("SET FOREIGN_KEY_CHECKS = 0;")
-
-cursor.execute(
-    "UPDATE Entity_Table (duplicate) Values "
-    + du[:-1]
-    + ";"
-)
-
-cursor.execute("SET FOREIGN_KEY_CHECKS = 1;")
+    cursor.execute(
+        "UPDATE Entity_Table SET duplicate = '"
+        + duplicates[i]
+        + "' WHERE Entity_ID = "
+        + Entity_Table3["Entity_ID"][i].astype(str)
+        + ";"
+    )
 
 connection.commit()
+
+connection.close()
